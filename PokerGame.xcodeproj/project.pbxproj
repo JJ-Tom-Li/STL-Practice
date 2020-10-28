@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE121B7B254815EA008BBC91 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE121B7A254815EA008BBC91 /* main.cpp */; };
+		CE121B842548191C008BBC91 /* Card.h in Sources */ = {isa = PBXBuildFile; fileRef = CE121B832548191C008BBC91 /* Card.h */; };
+		CE121B8725481B12008BBC91 /* PokerGame.h in Sources */ = {isa = PBXBuildFile; fileRef = CE121B8625481B12008BBC91 /* PokerGame.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,9 @@
 /* Begin PBXFileReference section */
 		CE121B77254815EA008BBC91 /* PokerGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PokerGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE121B7A254815EA008BBC91 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CE121B832548191C008BBC91 /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		CE121B8625481B12008BBC91 /* PokerGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokerGame.h; sourceTree = "<group>"; };
+		CE18F48A2549435200C5F7B8 /* CardTypeChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardTypeChecker.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				CE121B7A254815EA008BBC91 /* main.cpp */,
+				CE121B832548191C008BBC91 /* Card.h */,
+				CE121B8625481B12008BBC91 /* PokerGame.h */,
+				CE18F48A2549435200C5F7B8 /* CardTypeChecker.h */,
 			);
 			path = PokerGame;
 			sourceTree = "<group>";
@@ -119,6 +127,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE121B7B254815EA008BBC91 /* main.cpp in Sources */,
+				CE121B8725481B12008BBC91 /* PokerGame.h in Sources */,
+				CE121B842548191C008BBC91 /* Card.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
