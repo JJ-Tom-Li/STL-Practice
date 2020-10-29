@@ -8,79 +8,41 @@
 #include <iostream>
 #include <map>
 #include "PokerGame.h"
-std::map<int, int> winrate;
-void InitWinrRate(){
-    winrate.insert(std::pair<int, int>(0, 0));
-    winrate.insert(std::pair<int, int>(1, 0));
-    winrate.insert(std::pair<int, int>(2, 0));
-    winrate.insert(std::pair<int, int>(3, 0));
-    winrate.insert(std::pair<int, int>(5, 0));
-    winrate.insert(std::pair<int, int>(7, 0));
-    winrate.insert(std::pair<int, int>(10, 0));
-    winrate.insert(std::pair<int, int>(40, 0));
-    winrate.insert(std::pair<int, int>(100, 0));
-    winrate.insert(std::pair<int, int>(500, 0));
-}
-void GetWinRate(){
-    InitWinrRate();
-    int count = 100000;
-    int i = 0;
+int main(int argc, const char * argv[]) {
+    int playCount = 0;
+    int totalWinMoney = 0;
     PokerGame pokerGame;
-    while(i++ < count){
-        pokerGame.ResetCards();
-        if(pokerGame.DrawCards(5) == false){
+    std::string input = "0";
+    
+    std::cout << "輸入任意字元開始遊戲:" << std::endl;
+    while (std::cin >> input){
+        if (input == "0") {
             break;
         }
-        std::cout << i << ": ";
-        winrate[pokerGame.GetMoney()]++;
-    }
-    std::cout << "List win rates:\n";
-    std::cout << "同花大順: " << (double)winrate[500]*100/count << "%" <<std::endl;
-    std::cout << "同花順: " << (double)winrate[100]*100/count << "%" << std::endl;
-    std::cout << "鐵支: " << (double)winrate[40]*100/count << "%" << std::endl;
-    std::cout << "葫蘆: " << (double)winrate[10]*100/count << "%" << std::endl;
-    std::cout << "同花: " << (double)winrate[7]*100/count << "%" << std::endl;
-    std::cout << "順子: " << (double)winrate[5]*100/count << "%" << std::endl;
-    std::cout << "三條: " << (double)winrate[3]*100/count << "%" << std::endl;
-    std::cout << "兩對: " << (double)winrate[2]*100/count << "%" << std::endl;
-    std::cout << "一對(JQKA): " << (double)winrate[1]*100/count << "%" << std::endl;
-    std::cout << "無: " << (double)winrate[0]*100/count << "%" << std::endl;
-}
-int main(int argc, const char * argv[]) {
-//    GetWinRate();
-    int count = 0;
-    int totalMoney = 0;
-    while (1) {
-        PokerGame pokerGame;
-        std::cout << pokerGame.AllCardsToString() << std::endl;
-        int drawTimes = 10;
-        int money = 0;
-
-        while (drawTimes > 0) {
+        playCount++;
+        std::cout << "開始第" << playCount << "次遊戲:" << std::endl;
+        pokerGame.ResetGame();
+        
+        int winMoney = 0;
+        int drawCount = 10;
+        for (int i = 1; i <= drawCount; i++) {
             if(pokerGame.DrawCards(5) == false){
                 break;
             }
-//            std::vector<Card> c(5);
-//            c[0] = Card('D',13);
-//            c[1] = Card('D',12);
-//            c[2] = Card('D',1);
-//            c[3] = Card('D',11);
-//            c[4] = Card('D',2);
-//            pokerGame.SetHandCards(c);
-            std::cout << "Draw: " << pokerGame.HandCardsToString() << std::endl;
-            money += pokerGame.GetMoney();
-            --drawTimes;
+            std::cout << "第" << i << "輪抽牌: " << pokerGame.HandCardsToString() << std::endl;
+            winMoney += pokerGame.GetMoney();
         }
-        std::cout << "Remains: " << pokerGame.AllCardsToString() << std::endl;
-        std::cout << "Win: " << money << std::endl;
-        std::cout << "------------------------" << std::endl;
-        totalMoney += money;
-        count++;
-        if (count == 10000) {
-            break;
-        }
+        
+        std::cout << "剩下的牌: " << pokerGame.AllCardsToString() << "\n"
+                << drawCount << "輪抽牌共贏得: " << winMoney << " 元\n"
+                << "------------------------" << std::endl;
+        
+        totalWinMoney += winMoney;
+        
+        std::cout << "輸入任意文字繼續遊玩，輸入0結束:";
     }
-    std::cout << "Totally play " << count << " times." << std::endl;
-    std::cout << "Average win: " << (double)totalMoney/count << std::endl;
+    
+    std::cout << "總遊玩次數: " << playCount << " 次.\n"
+            << "共贏得 " << totalWinMoney << " 元，平均贏得: " << (double)totalWinMoney/playCount << " 元" <<std::endl;
     return 0;
 }
