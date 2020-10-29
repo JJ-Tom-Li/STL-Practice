@@ -16,18 +16,21 @@
 #include "CardTypeChecker.h"
 
 class PokerGame {
-    std::vector<Card> cards;
     
 public:
     PokerGame();
     
     void ResetCards();
     void ShuffleCards(int);
-    void ShowCards();
-    int GetMoney(std::vector<std::string>);
-    std::vector<std::string> DrawCards(int);
-    
+    std::string CardsToString(std::vector<Card>);
+    std::string HandCardsToString();
+    std::string AllCardsToString();
+    int GetMoney();
+    bool DrawCards(int);
+    void SetHandCards(std::vector<Card>);
 private:
+    std::vector<Card> cards;
+    std::vector<Card> handCards;
     CardTypeChecker cardTypeChecker;
     std::random_device seed;
     std::mt19937_64 randomNumberGenerator;
@@ -39,10 +42,13 @@ private:
 
 PokerGame::PokerGame(){
     randomNumberGenerator = std::mt19937_64(seed());
+    ResetCards();
+}
+
+void PokerGame::ResetCards(){
     cards = Card::GeneratePokerCards();
     ShuffleCards(10);
 }
-
 
 void PokerGame::ShuffleCards(int shuffleTimes = 1){
     int randomInt;
@@ -50,12 +56,10 @@ void PokerGame::ShuffleCards(int shuffleTimes = 1){
     int length = (int)cards.size();
     distribution = std::uniform_int_distribution<int>(0, length - 1);
     
-    //std::cout << "Shuffle " << shuffleTimes << " times" << std::endl;
     while (shuffleTimes > 0) {
         for (int i = 0; i < length; i++) {
             randomInt = distribution(randomNumberGenerator);
-            //std::cout << i << " to " << randomInt << std::endl;
-            // 隨機交換
+            
             tempCard = cards[i];
             cards[i] = cards[randomInt];
             cards[randomInt] = tempCard;
@@ -64,63 +68,63 @@ void PokerGame::ShuffleCards(int shuffleTimes = 1){
     }
 }
 
-void PokerGame::ShowCards(){
+std::string PokerGame::CardsToString(std::vector<Card> cards){
     int length = (int)cards.size();
+    std::string returnString;
+    
     for (int i = 0; i < length; i++) {
-        std::cout << cards[i].ToString() << ",";
+        returnString += cards[i].ToString() + ", ";
     }
-    std::cout << std::endl;
+    return returnString;
 }
 
-int PokerGame::GetMoney(std::vector<std::string> handCards){
+std::string PokerGame::HandCardsToString(){
+    return CardsToString(this->handCards);
+}
+
+std::string PokerGame::AllCardsToString(){
+    return CardsToString(this->cards);
+}
+
+int PokerGame::GetMoney(){
     if (handCards.size() == 0) {
         return 0;
     }
     
-    std::vector<Card> handCards_(handCards.size());
-    for (int i = 0; i < handCards.size(); i++) {
-        handCards_[i] = Card::StringToCard(handCards[i]);
-    }
-    
-    std::string cardType = cardTypeChecker.GetCardType(handCards_);
+    std::string cardType = cardTypeChecker.GetCardType(handCards);
     int money = cardTypeChecker.GetMoneyByCardType(cardType);
     
-    std::vector<Card> sortedCards = Card::Sort(handCards_);
-    for (int i = 0; i < handCards.size(); i++) {
-        std::cout << sortedCards[i].ToString() << ", ";
-    }
-    std::cout << cardType << ", wins " << money << "\n" << std::endl;
-    return money;
+    std::vector<Card> sortedCards = Card::Sort(handCards);
+    std::cout << CardsToString(sortedCards) << cardType << ", wins " << money << "\n" << std::endl;
+   return money;
 }
 
-std::vector<std::string> PokerGame::DrawCards(int numberOfCards){
-    std::vector<std::string> drawCards;
+bool PokerGame::DrawCards(int numberOfCards){
     if (numberOfCards > cards.size()) {
         std::cout << cards.size() << " cards remains. No enough cards to draw." << std::endl;
+        return false;
     }
     else{
-        drawCards = std::vector<std::string>(numberOfCards, "");
-        std::cout << "Draw ";
+        handCards = std::vector<Card>(numberOfCards, Card());
         for (int i = 0; i < numberOfCards; i++) {
-            drawCards[i] = DrawCard().ToString();
-            std::cout << drawCards[i] << ", ";
+            handCards[i] = DrawCard();
         }
-        std::cout << " from cards" << std::endl;
     }
-    return drawCards;
+    return true;
 }
 
 Card PokerGame::DrawCard(){
     Card drawCard = Card();
     int length = (int)cards.size();
+    int randomInt = 0;
     distribution = std::uniform_int_distribution<int>(0, length - 1);
-    int randomInt = distribution(randomNumberGenerator);
+    randomInt = distribution(randomNumberGenerator);
     
-    //std::cout << "Draw " << cards[randomInt].ToString() << " from cards" << std::endl;
     drawCard = cards[randomInt];
-    //ShowCards();
     cards.erase(cards.begin() + randomInt);
-    //ShowCards();
     return drawCard;
+}
+void PokerGame::SetHandCards(std::vector<Card> cards){
+    handCards = cards;
 }
 #endif

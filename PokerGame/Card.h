@@ -14,7 +14,6 @@
 #define NUMBER_OF_POKER_CARDS 52
 class Card {
 public:
-    
     Card();
     Card(char, int);
     static std::vector<Card> GeneratePokerCards();
@@ -25,12 +24,12 @@ public:
     bool NumberEquals(Card);
     bool NumberEquals(int);
     int Sub(Card);
-    
     std::string ToString();
+    
     static Card StringToCard(std::string);
     static std::vector<Card> Sort(std::vector<Card>);
-    constexpr static const char suits[NUMBER_OF_CARD_SUITS] = {'S', 'H', 'D', 'C'};
 private:
+    constexpr static const char suits[NUMBER_OF_CARD_SUITS] = {'S', 'H', 'D', 'C'};
     char suit;
     int number;
     static bool CardCompare(Card, Card);

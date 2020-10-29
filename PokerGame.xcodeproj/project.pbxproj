@@ -30,6 +30,7 @@
 		CE121B832548191C008BBC91 /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		CE121B8625481B12008BBC91 /* PokerGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokerGame.h; sourceTree = "<group>"; };
 		CE18F48A2549435200C5F7B8 /* CardTypeChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardTypeChecker.h; sourceTree = "<group>"; };
+		CE5A20BC254A621C0060233B /* CardType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardType.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 				CE121B832548191C008BBC91 /* Card.h */,
 				CE121B8625481B12008BBC91 /* PokerGame.h */,
 				CE18F48A2549435200C5F7B8 /* CardTypeChecker.h */,
+				CE5A20BC254A621C0060233B /* CardType.h */,
 			);
 			path = PokerGame;
 			sourceTree = "<group>";
