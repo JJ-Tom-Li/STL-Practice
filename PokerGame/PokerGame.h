@@ -19,13 +19,13 @@ class PokerGame {
     
 public:
     PokerGame();
-    
     void ResetGame();
     std::string CardsToString(std::vector<Card>);
     std::string HandCardsToString();
     std::string AllCardsToString();
     int GetMoney();
     bool DrawCards(int);
+    
 private:
     std::vector<Card> cards;
     std::vector<Card> handCards;
@@ -35,7 +35,6 @@ private:
     std::uniform_int_distribution<int> distribution;
     
     Card DrawCard();
-    bool RemoveCard();
 };
 
 PokerGame::PokerGame(){

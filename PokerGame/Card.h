@@ -25,6 +25,7 @@ public:
     bool NumberEquals(Card);
     bool NumberEquals(int);
     int Sub(Card);
+    int Sub(int);
     std::string ToString();
     
     static std::vector<Card> Sort(std::vector<Card>);
@@ -67,6 +68,10 @@ bool Card::NumberEquals(int number){
 
 int Card::Sub(Card card){
     return (this->number - card.number);
+}
+
+int Card::Sub(int number){
+    return (this->number - number);
 }
 
 std::vector<Card> Card::GeneratePokerCards(){

@@ -64,10 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				CE121B7A254815EA008BBC91 /* main.cpp */,
-				CE121B832548191C008BBC91 /* Card.h */,
 				CE121B8625481B12008BBC91 /* PokerGame.h */,
 				CE18F48A2549435200C5F7B8 /* CardTypeChecker.h */,
 				CE5A20BC254A621C0060233B /* CardType.h */,
+				CE121B832548191C008BBC91 /* Card.h */,
 			);
 			path = PokerGame;
 			sourceTree = "<group>";

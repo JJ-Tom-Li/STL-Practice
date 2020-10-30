@@ -31,6 +31,7 @@ CardTypeChecker::CardTypeChecker(){
 }
 
 void CardTypeChecker::InitCardTypes(){
+    // push的順序很重要，會影響結果．最先push的優先度最高．
     cardTypes.push_back(new RoyalFlush("同花大順"));
     cardTypes.push_back(new StraightFlush("同花順"));
     cardTypes.push_back(new FourOfAKind("鐵支"));
@@ -41,15 +42,15 @@ void CardTypeChecker::InitCardTypes(){
     cardTypes.push_back(new TwoPairs("兩對"));
     cardTypes.push_back(new OnePair("一對(JQKA)"));
     
-    cardTypesMoney.insert(std::pair<std::string, int>("同花大順", 500));
-    cardTypesMoney.insert(std::pair<std::string, int>("同花順", 100));
-    cardTypesMoney.insert(std::pair<std::string, int>("鐵支", 40));
-    cardTypesMoney.insert(std::pair<std::string, int>("葫蘆", 10));
-    cardTypesMoney.insert(std::pair<std::string, int>("同花", 7));
-    cardTypesMoney.insert(std::pair<std::string, int>("順子", 5));
-    cardTypesMoney.insert(std::pair<std::string, int>("三條", 3));
-    cardTypesMoney.insert(std::pair<std::string, int>("兩對", 2));
-    cardTypesMoney.insert(std::pair<std::string, int>("一對(JQKA)", 1));
+    cardTypesMoney["同花大順"] = 500;
+    cardTypesMoney["同花順"] = 100;
+    cardTypesMoney["鐵支"] = 40;
+    cardTypesMoney["葫蘆"] = 10;
+    cardTypesMoney["同花"] = 7;
+    cardTypesMoney["順子"] = 5;
+    cardTypesMoney["三條"] = 3;
+    cardTypesMoney["兩對"] = 2;
+    cardTypesMoney["一對(JQKA)"] = 1;
 }
 
 std::string CardTypeChecker::GetCardType(std::vector<Card> cards){

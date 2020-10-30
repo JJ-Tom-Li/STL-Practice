@@ -137,10 +137,10 @@ public:
         int maxSameNumber = pair.second;
         bool result = false;
         
-        if (maxSameNumber == 2
-            && ( cards[start].NumberEquals(11) || cards[start].NumberEquals(12) || cards[start].NumberEquals(13) || cards[start].NumberEquals(1))) {
+        if ( maxSameNumber == 2
+            && ( (cards[start].Sub(11) >= 0) || cards[start].NumberEquals(1) ) ) {
             cards = RemoveCards(cards, start, 2);
-                result = (!cards[0].NumberEquals(cards[1]) && !cards[1].NumberEquals(cards[2]) && !cards[0].NumberEquals(cards[2]));
+            result = (!cards[0].NumberEquals(cards[1]) && !cards[1].NumberEquals(cards[2]) && !cards[0].NumberEquals(cards[2]));
         }
         return result;
     }
